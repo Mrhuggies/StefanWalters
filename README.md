@@ -270,3 +270,4 @@ For questions about:
 ---
 
 Built with Next.js 15, React 19, TypeScript, and Tailwind CSS.
+
