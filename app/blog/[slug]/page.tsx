@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { getPostBySlug, getAllPostSlugs, formatDate, generateBlogPostingSchema } from '@/lib/wordpress';
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
   
   if (!post) {
     notFound();
@@ -127,8 +128,9 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each post
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
   
   if (!post) {
     return {
