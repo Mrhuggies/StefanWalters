@@ -48,3 +48,36 @@
     background: linear-gradient(120deg, transparent 0%, transparent 60%, var(--tech-blue) 60%, var(--tech-blue) 90%, transparent 90%);
   }
 }
+
+/* WordPress Blog Content Styling */
+.prose p {
+  @apply mb-6 leading-relaxed;
+}
+
+.prose h2 {
+  @apply mt-10 mb-4;
+}
+
+.prose h3 {
+  @apply mt-8 mb-3;
+}
+
+.prose ul, .prose ol {
+  @apply mb-6 ml-6;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-accent pl-6 italic my-6;
+}
+
+.prose img {
+  @apply rounded-lg my-8;
+}
+
+.prose a {
+  @apply text-accent hover:underline;
+}
