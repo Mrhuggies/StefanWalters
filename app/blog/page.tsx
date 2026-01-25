@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { getAllPosts, formatDate } from '@/lib/wordpress';
+import { getAllPosts, formatDate, sanitizeHtml, stripHtml } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
   title: 'Blog | Insights on Therapy, Mental Health & Relationships',
@@ -51,7 +51,7 @@ export default async function BlogPage() {
                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-gray-100">
                       <Image
                         src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/KewGardens-15.webp'}
-                        alt={post.title.rendered}
+                        alt={stripHtml(post.title.rendered)}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -62,15 +62,16 @@ export default async function BlogPage() {
                       {formatDate(post.date)}
                     </time>
 
-                    {/* Title */}
-                    <h2 className="text-2xl font-bold text-primary mt-2 mb-3 group-hover:text-accent transition-colors">
-                      {post.title.rendered}
-                    </h2>
+                    {/* Title - Sanitized */}
+                    <h2 
+                      className="text-2xl font-bold text-primary mt-2 mb-3 group-hover:text-accent transition-colors"
+                      dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.title.rendered) }}
+                    />
 
-                    {/* Excerpt */}
+                    {/* Excerpt - Sanitized */}
                     <div 
                       className="text-gray-600 line-clamp-3"
-                      dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.excerpt.rendered) }}
                     />
 
                     {/* Read More Link */}

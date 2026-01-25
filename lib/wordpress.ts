@@ -2,9 +2,46 @@
  * WordPress API Integration
  * 
  * Uses the WordPress REST API to fetch blog posts
+ * Includes security sanitization for all HTML content
  */
 
+import DOMPurify from 'isomorphic-dompurify';
+
 const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://stefanwalters.com/wp-json/wp/v2';
+
+// Configure DOMPurify to allow safe HTML elements
+const DOMPURIFY_CONFIG = {
+  ALLOWED_TAGS: [
+    'p', 'br', 'strong', 'em', 'b', 'i', 'u', 's', 'strike',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'ul', 'ol', 'li',
+    'a', 'img',
+    'blockquote', 'pre', 'code',
+    'table', 'thead', 'tbody', 'tr', 'th', 'td',
+    'figure', 'figcaption',
+    'div', 'span',
+    'iframe' // For embedded videos - restricted by ALLOWED_URI_REGEXP
+  ],
+  ALLOWED_ATTR: [
+    'href', 'src', 'alt', 'title', 'class', 'id',
+    'target', 'rel',
+    'width', 'height',
+    'loading', 'decoding',
+    'frameborder', 'allowfullscreen', 'allow'
+  ],
+  ALLOW_DATA_ATTR: false,
+  ADD_ATTR: ['target'],
+  // Only allow safe protocols
+  ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+};
+
+/**
+ * Sanitize HTML content from WordPress to prevent XSS attacks
+ */
+export function sanitizeHtml(html: string): string {
+  if (!html) return '';
+  return DOMPurify.sanitize(html, DOMPURIFY_CONFIG);
+}
 
 export interface WPPost {
   id: number;
@@ -104,9 +141,13 @@ export function formatDate(dateString: string): string {
 
 /**
  * Helper to strip HTML tags from excerpt
+ * Uses DOMPurify for safe text extraction
  */
 export function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '');
+  if (!html) return '';
+  // First sanitize, then strip all tags
+  const sanitized = DOMPurify.sanitize(html, { ALLOWED_TAGS: [] });
+  return sanitized.replace(/&nbsp;/g, ' ').trim();
 }
 
 /**

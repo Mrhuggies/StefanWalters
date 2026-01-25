@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
-import { getPostBySlug, getAllPostSlugs, formatDate, generateBlogPostingSchema } from '@/lib/wordpress';
+import { getPostBySlug, getAllPostSlugs, formatDate, generateBlogPostingSchema, sanitizeHtml, stripHtml } from '@/lib/wordpress';
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -48,17 +48,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <time>{formatDate(post.date)}</time>
           </div>
 
-          {/* Title */}
-          <h1 className="text-5xl md:text-6xl font-bold text-primary mb-8 leading-tight">
-            {post.title.rendered}
-          </h1>
+          {/* Title - Sanitized */}
+          <h1 
+            className="text-5xl md:text-6xl font-bold text-primary mb-8 leading-tight"
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.title.rendered) }}
+          />
 
           {/* Featured Image */}
           {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
             <div className="relative aspect-[21/9] rounded-2xl overflow-hidden mb-12">
               <Image
                 src={post._embedded['wp:featuredmedia'][0].source_url}
-                alt={post.title.rendered}
+                alt={stripHtml(post.title.rendered)}
                 fill
                 className="object-cover"
                 priority
@@ -66,10 +67,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </div>
           )}
 
-          {/* Content */}
+          {/* Content - Sanitized for XSS protection */}
           <div 
             className="prose prose-lg prose-primary max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content.rendered) }}
           />
         </div>
       </article>
