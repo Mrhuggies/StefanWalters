@@ -77,7 +77,7 @@ export default function PerformanceCoachingPage() {
               with the subcortical brain — the deep, felt regions where performance blocks, 
               trauma, and emotional interference are held. Unlike talk therapy, which works at 
               the level of thought, Brainspotting works at the level of the nervous system, 
-              where real change actually happens.
+              where real change actually happens. As we rewire the neural pathways of the brain, Brainspotting can be a powerful modality for clients with traumatic brain injury, cognitive impairement, or neurodevelopmental disorders.
             </p>
             <p>
               I am fully certified in all Phases of Brainspotting, having trained personally 
