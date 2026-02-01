@@ -47,10 +47,10 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-xl font-bold text-primary mb-3">Email</h3>
                   <a 
-                    href="mailto:stefan@walters.com" 
+                    href="mailto:Stefan@stefanwalters.com" 
                     className="text-2xl text-accent hover:underline font-medium block mb-2"
                   >
-                    stefan@walters.com
+                    Stefan@stefanwalters.com
                   </a>
                   <p className="text-gray-600">
                     I typically respond within 24 hours
@@ -67,10 +67,10 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-xl font-bold text-primary mb-3">Phone</h3>
                   <a 
-                    href="tel:+447526456477" 
+                    href="tel:07526456477" 
                     className="text-2xl text-accent hover:underline font-medium block mb-2"
                   >
-                    +44 7526 456 477
+                    07526 456 477
                   </a>
                   <p className="text-gray-600">
                     Leave a voicemail if I&apos;m in session
@@ -174,7 +174,7 @@ export default function ContactPage() {
             Send me an email and let&apos;s start the conversation.
           </p>
           <a 
-            href="mailto:stefan@walters.com" 
+            href="mailto:Stefan@stefanwalters.com" 
             className="btn btn-primary text-xl px-10 py-4"
           >
             Email Stefan

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Instagram, BookOpen } from 'lucide-react';
+import { Facebook, Instagram, BookOpen, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -10,11 +10,11 @@ export default function Footer() {
           <div className="space-y-3">
             <h3 className="text-xl font-display font-bold text-primary">Stefan Walters</h3>
             <p className="text-gray-600">Systemic Psychotherapist</p>
-            <a href="mailto:stefan@walters.com" className="text-accent hover:underline block">
-              stefan@walters.com
+            <a href="mailto:Stefan@stefanwalters.com" className="text-accent hover:underline block">
+              Stefan@stefanwalters.com
             </a>
-            <a href="tel:+447123456789" className="text-gray-600 hover:text-accent block">
-              +44 7123 456 789
+            <a href="tel:07526456477" className="text-gray-600 hover:text-accent block">
+              07526 456 477
             </a>
           </div>
 
@@ -22,9 +22,12 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="font-semibold text-primary">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link href="/services" className="text-gray-600 hover:text-accent transition-colors">Services</Link></li>
-              <li><Link href="/brainspotting" className="text-gray-600 hover:text-accent transition-colors">Brainspotting</Link></li>
-              <li><Link href="/blog" className="text-gray-600 hover:text-accent transition-colors">Blog</Link></li>
+              <li><Link href="/about-me" className="text-gray-600 hover:text-accent transition-colors">About Me</Link></li>
+              <li><Link href="/work-with-me" className="text-gray-600 hover:text-accent transition-colors">Work With Me</Link></li>
+              <li><Link href="/relationships" className="text-gray-600 hover:text-accent transition-colors">Relationships</Link></li>
+              <li><Link href="/performance-coaching" className="text-gray-600 hover:text-accent transition-colors">Performance Coaching</Link></li>
+              <li><Link href="/corporate" className="text-gray-600 hover:text-accent transition-colors">Corporate Wellbeing</Link></li>
+              <li><Link href="/free-resources" className="text-gray-600 hover:text-accent transition-colors">Free Resources</Link></li>
               <li><Link href="/contact" className="text-gray-600 hover:text-accent transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -34,7 +37,7 @@ export default function Footer() {
             <h4 className="font-semibold text-primary">Connect</h4>
             <div className="flex gap-4">
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/people/Stefan-Walters-Performance-and-Wellbeing/61586176065368/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-accent transition-colors"
@@ -43,7 +46,16 @@ export default function Footer() {
                 <Facebook size={22} />
               </a>
               <a 
-                href="https://instagram.com" 
+                href="https://www.youtube.com/@thevisionarytherapist" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-accent transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube size={22} />
+              </a>
+              <a 
+                href="https://www.instagram.com/stefanwalterstherapy" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-accent transition-colors"
@@ -52,7 +64,7 @@ export default function Footer() {
                 <Instagram size={22} />
               </a>
               <a 
-                href="https://substack.com" 
+                href="https://substack.com/@stefanwaltersuk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-accent transition-colors"

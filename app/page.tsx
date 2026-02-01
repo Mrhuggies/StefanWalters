@@ -29,8 +29,7 @@ export default function HomePage() {
                 <em className="not-italic gradient-text">yourself</em>.
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                Specialist support for trauma, relationships, and high-performance living. 
-                A safe space to explore what's holding you back and how to move forward.
+                Contemporary, evidence-based therapy and coaching — for individuals, couples, and groups. Based in London, working online worldwide.
               </p>
               
               <div className="flex gap-4 pt-4">
@@ -66,19 +65,20 @@ export default function HomePage() {
       </section>
 
       {/* About/Approach Section */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-4xl font-bold text-primary mb-4">
               A Modern Approach to Therapy
             </h2>
             <p className="text-lg text-gray-600">
-              I believe in the transformative power of being truly heard. 
-              My work combines clinical expertise with a human, relatable approach.
+              Specialising in relationships, nervous system health and performance. 
+              Whether it's something specific that's been troubling you, or a quiet feeling that something isn't quite right, I'm here to help you get to the root of it — and find your way back to feeling like yourself.
+              I work with a range of issues including attachment difficulties, relationship conflict, trauma recovery, performance blocks, anxiety, and more. Whatever you're facing, we'll work through it together.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="feature-card">
               <h3 className="text-xl font-bold text-primary mb-3">Trauma & Attachment</h3>
               <p className="text-gray-600">
@@ -103,11 +103,20 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-primary mb-4">
+              How I Work
+            </h2>
+            <p className="text-lg text-gray-600">
+              Fully qualified. Fully registered. I'm a fully qualified integrative psychotherapist, a certified Brainspotting therapist, and a fully trained Emotionally Focused Couples Therapist. I'm also a registered provider with Aviva, AXA, BUPA, Cigna, Healix, and WPA. My work has been featured in The Times, The Guardian, The Telegraph, GQ, and many more, and I've appeared on the BBC and Channel 4. I'm also a registered aftercare provider for Hope Rehab Centre in Thailand.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Quote Section */}
-      <section className="py-32 bg-tech-blue">
+      <section className="py-20 bg-tech-blue">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <blockquote className="text-3xl md:text-4xl font-semibold text-primary leading-relaxed">
             "The biggest thing that holds us back is often the story we tell ourselves. 
@@ -117,7 +126,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24">
+      <section className="py-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-primary rounded-3xl p-16 text-center text-white">
             <h2 className="text-4xl font-bold mb-4">Ready to talk?</h2>
