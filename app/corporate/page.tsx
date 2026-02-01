@@ -36,7 +36,7 @@ export default function CorporatePage() {
             </div>
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/stefan4.png"
+                src="/images/stefan5.jpeg"
                 alt="Corporate Coaching Session"
                 fill
                 className="object-cover"
