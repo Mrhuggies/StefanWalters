@@ -82,7 +82,7 @@ export default function PerformanceCoachingPage() {
             <p>
               I am fully certified in all Phases of Brainspotting, having trained personally 
               with founder David Grand at his Masterclass in London. I've been using the 
-              technique professionally since 2015
+              technique professionally since 2015.
             </p>
             <p>
               If you've tried talk therapy before and felt stuck, Brainspotting offers something 
