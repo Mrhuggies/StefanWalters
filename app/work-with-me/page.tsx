@@ -30,7 +30,7 @@ export default function WorkWithMePage() {
             </div>
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/KewGardens-15.webp"
+                src="/images/stefan.webp"
                 alt="Stefan Walters - Therapist"
                 fill
                 className="object-cover"

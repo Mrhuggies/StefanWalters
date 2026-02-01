@@ -37,7 +37,7 @@ export default function PerformanceCoachingPage() {
             </div>
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/KewGardens-30.webp"
+                src="/images/stefanbrainspotting.webp"
                 alt="Performance Coaching Session"
                 fill
                 className="object-cover"

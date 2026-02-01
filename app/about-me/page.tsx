@@ -17,7 +17,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/KewGardens-15.webp"
+                  src="/images/stefan3.webp"
                   alt="Stefan Walters - Psychotherapist"
                   fill
                   className="object-cover"
