@@ -7,7 +7,7 @@
 
 import DOMPurify from 'isomorphic-dompurify';
 
-const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://stefanwalters.com/wp-json/wp/v2';
+const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://cms.stefanwalters.com/wp-json/wp/v2';
 
 // Configure DOMPurify to allow safe HTML elements
 const DOMPURIFY_CONFIG = {

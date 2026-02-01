@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import LogoBanner from '../components/LogoBanner';
 
 export const metadata: Metadata = {
   title: 'Corporate Wellbeing & Performance | Stefan Walters',
@@ -36,7 +37,7 @@ export default function CorporatePage() {
             </div>
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/stefan5.jpeg"
+                src="/images/stefan3.webp"
                 alt="Corporate Coaching Session"
                 fill
                 className="object-cover"
@@ -120,6 +121,14 @@ export default function CorporatePage() {
               and JCounselling.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Logo Banner */}
+      <section className="py-12 bg-bg">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-center text-gray-500 text-sm uppercase tracking-wider mb-6">Trusted by leading organisations</p>
+          <LogoBanner />
         </div>
       </section>
 
