@@ -57,17 +57,27 @@ export interface WPPost {
  * Fetch all blog posts from WordPress
  */
 export async function getAllPosts(): Promise<WPPost[]> {
+  const url = `${WORDPRESS_API_URL}/posts?_embed&per_page=100`;
+  console.log('Fetching posts from:', url);
+  
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/posts?_embed&per_page=100`, {
-      next: { revalidate: 60 } // Revalidate every 60 seconds
+    const res = await fetch(url, {
+      cache: 'no-store', // Always fetch fresh data
+      headers: {
+        'Accept': 'application/json',
+      },
     });
 
+    console.log('Response status:', res.status, res.statusText);
+
     if (!res.ok) {
-      console.error('Failed to fetch posts:', res.statusText);
+      console.error('Failed to fetch posts:', res.status, res.statusText);
       return [];
     }
 
-    return res.json();
+    const posts = await res.json();
+    console.log('Fetched posts count:', posts.length);
+    return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);
     return [];
@@ -80,7 +90,7 @@ export async function getAllPosts(): Promise<WPPost[]> {
 export async function getPostBySlug(slug: string): Promise<WPPost | null> {
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`, {
-      next: { revalidate: 60 }
+      cache: 'no-store',
     });
 
     if (!res.ok) {
@@ -101,7 +111,9 @@ export async function getPostBySlug(slug: string): Promise<WPPost | null> {
  */
 export async function getAllPostSlugs(): Promise<string[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/posts?_fields=slug&per_page=100`);
+    const res = await fetch(`${WORDPRESS_API_URL}/posts?_fields=slug&per_page=100`, {
+      cache: 'no-store',
+    });
 
     if (!res.ok) {
       console.error('Failed to fetch post slugs:', res.statusText);
