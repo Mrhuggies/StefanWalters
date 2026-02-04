@@ -3,6 +3,9 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { getAllPosts, formatDate, sanitizeHtml, stripHtml } from '@/lib/wordpress';
 
+// Force dynamic rendering to fetch fresh posts on each request
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Blog | Insights on Therapy, Mental Health & Relationships',
   description: 'Expert insights on therapy, mental health, trauma, relationships, and personal growth from experienced psychotherapist Stefan Walters.',
@@ -50,7 +53,7 @@ export default async function BlogPage() {
                     {/* Featured Image */}
                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-gray-100">
                       <Image
-                        src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/KewGardens-15.webp'}
+                        src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/stefan1.webp'}
                         alt={stripHtml(post.title.rendered)}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
