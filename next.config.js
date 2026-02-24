@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'stefanwalters.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cms.stefanwalters.com',
+      },
     ],
   },
   
@@ -54,7 +58,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://stefanwalters.com",
+              "connect-src 'self' https://stefanwalters.com https://cms.stefanwalters.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

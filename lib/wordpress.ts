@@ -5,42 +5,31 @@
  * Includes security sanitization for all HTML content
  */
 
-import DOMPurify from 'isomorphic-dompurify';
+const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://cms.stefanwalters.com/wp-json/wp/v2';
 
-const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://stefanwalters.com/wp-json/wp/v2';
-
-// Configure DOMPurify to allow safe HTML elements
-const DOMPURIFY_CONFIG = {
-  ALLOWED_TAGS: [
-    'p', 'br', 'strong', 'em', 'b', 'i', 'u', 's', 'strike',
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'ul', 'ol', 'li',
-    'a', 'img',
-    'blockquote', 'pre', 'code',
-    'table', 'thead', 'tbody', 'tr', 'th', 'td',
-    'figure', 'figcaption',
-    'div', 'span',
-    'iframe' // For embedded videos - restricted by ALLOWED_URI_REGEXP
-  ],
-  ALLOWED_ATTR: [
-    'href', 'src', 'alt', 'title', 'class', 'id',
-    'target', 'rel',
-    'width', 'height',
-    'loading', 'decoding',
-    'frameborder', 'allowfullscreen', 'allow'
-  ],
-  ALLOW_DATA_ATTR: false,
-  ADD_ATTR: ['target'],
-  // Only allow safe protocols
-  ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
-};
+// Allowed HTML tags for sanitization
+const ALLOWED_TAGS = [
+  'p', 'br', 'strong', 'em', 'b', 'i', 'u', 's',
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'ul', 'ol', 'li', 'a', 'blockquote', 'pre', 'code'
+];
 
 /**
- * Sanitize HTML content from WordPress to prevent XSS attacks
+ * Simple HTML sanitizer that works in all environments
  */
 export function sanitizeHtml(html: string): string {
   if (!html) return '';
-  return DOMPurify.sanitize(html, DOMPURIFY_CONFIG);
+  
+  // Remove script tags and their contents
+  let clean = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  
+  // Remove event handlers
+  clean = clean.replace(/\s*on\w+\s*=\s*["'][^"']*["']/gi, '');
+  
+  // Remove javascript: URLs
+  clean = clean.replace(/href\s*=\s*["']javascript:[^"']*["']/gi, 'href="#"');
+  
+  return clean;
 }
 
 export interface WPPost {
@@ -68,17 +57,27 @@ export interface WPPost {
  * Fetch all blog posts from WordPress
  */
 export async function getAllPosts(): Promise<WPPost[]> {
+  const url = `${WORDPRESS_API_URL}/posts?_embed&per_page=100`;
+  console.log('Fetching posts from:', url);
+  
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/posts?_embed&per_page=100`, {
-      next: { revalidate: 60 } // Revalidate every 60 seconds
+    const res = await fetch(url, {
+      cache: 'no-store', // Always fetch fresh data
+      headers: {
+        'Accept': 'application/json',
+      },
     });
 
+    console.log('Response status:', res.status, res.statusText);
+
     if (!res.ok) {
-      console.error('Failed to fetch posts:', res.statusText);
+      console.error('Failed to fetch posts:', res.status, res.statusText);
       return [];
     }
 
-    return res.json();
+    const posts = await res.json();
+    console.log('Fetched posts count:', posts.length);
+    return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);
     return [];
@@ -91,7 +90,7 @@ export async function getAllPosts(): Promise<WPPost[]> {
 export async function getPostBySlug(slug: string): Promise<WPPost | null> {
   try {
     const res = await fetch(`${WORDPRESS_API_URL}/posts?slug=${slug}&_embed`, {
-      next: { revalidate: 60 }
+      cache: 'no-store',
     });
 
     if (!res.ok) {
@@ -112,7 +111,9 @@ export async function getPostBySlug(slug: string): Promise<WPPost | null> {
  */
 export async function getAllPostSlugs(): Promise<string[]> {
   try {
-    const res = await fetch(`${WORDPRESS_API_URL}/posts?_fields=slug&per_page=100`);
+    const res = await fetch(`${WORDPRESS_API_URL}/posts?_fields=slug&per_page=100`, {
+      cache: 'no-store',
+    });
 
     if (!res.ok) {
       console.error('Failed to fetch post slugs:', res.statusText);
@@ -141,13 +142,12 @@ export function formatDate(dateString: string): string {
 
 /**
  * Helper to strip HTML tags from excerpt
- * Uses DOMPurify for safe text extraction
  */
 export function stripHtml(html: string): string {
   if (!html) return '';
-  // First sanitize, then strip all tags
-  const sanitized = DOMPurify.sanitize(html, { ALLOWED_TAGS: [] });
-  return sanitized.replace(/&nbsp;/g, ' ').trim();
+  // Strip all HTML tags
+  const stripped = html.replace(/<[^>]*>/g, '');
+  return stripped.replace(/&nbsp;/g, ' ').replace(/&#8217;/g, "'").replace(/&#8230;/g, '...').trim();
 }
 
 /**

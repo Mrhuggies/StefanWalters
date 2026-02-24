@@ -36,7 +36,7 @@ export default function RelationshipsPage() {
             </div>
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/KewGardens-15.webp"
+                src="/images/stefan2.webp"
                 alt="Couples Therapy Session"
                 fill
                 className="object-cover"

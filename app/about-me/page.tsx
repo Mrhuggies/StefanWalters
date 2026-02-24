@@ -17,7 +17,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/KewGardens-15.webp"
+                  src="/images/stefan4.webp"
                   alt="Stefan Walters - Psychotherapist"
                   fill
                   className="object-cover"
@@ -45,7 +45,10 @@ export default function AboutPage() {
       {/* Story Section */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 space-y-6">
-          <h2 className="text-4xl font-bold text-primary mb-6">My Background</h2>
+          <span className="text-accent font-semibold uppercase tracking-wider text-sm">
+            Nervous System Coaching
+          </span>
+          <h2 className="text-4xl font-bold text-primary mb-2">My Background</h2>
           
           <div className="prose prose-lg max-w-none space-y-6 text-gray-700">
             <p className="text-lg leading-relaxed">

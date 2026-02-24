@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Instagram, BookOpen, Youtube } from 'lucide-react';
 
 export default function Footer() {
@@ -77,12 +78,22 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-10 pt-8 border-t border-gray-200 text-center">
-          <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} Stefan Walters. All rights reserved. 
-            <span className="mx-2">•</span>
-            Registered with BACP & BPS
-          </p>
+        <div className="mt-10 pt-8 border-t border-gray-200">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500 text-sm">
+              &copy; {new Date().getFullYear()} Stefan Walters. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="text-gray-500 text-sm">Registered with</span>
+              <Image
+                src="/images/BACP-Logo---59348-2.webp"
+                alt="BACP Registered"
+                width={80}
+                height={40}
+                className="object-contain"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </footer>
