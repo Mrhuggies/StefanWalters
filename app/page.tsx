@@ -36,7 +36,7 @@ export default function HomePage() {
                 <Link href="/contact" className="btn btn-primary">
                   Start Your Journey
                 </Link>
-                <Link href="/services" className="btn btn-text">
+                <Link href="/work-with-me" className="btn btn-text">
                   Learn More →
                 </Link>
               </div>
